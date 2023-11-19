@@ -2,7 +2,15 @@
 
 
 ## Setup
-On the prinary node of the tnak8s profile, set up with:
+Clone this repo/branch:
+```
+cd $HOME
+git clone https://github.com/hunhoffe/PerfKitBenchmarker.git
+cd $HOME/PerfKitBenchmarker
+git checkout --track origin/netperf-docker-image
+```
+
+On the prinary node of the tnak8s profile, install dependencies and config with:
 ```bash
 cd $HOME/PerfKitBenchmarker/tna
 ./setup.sh
