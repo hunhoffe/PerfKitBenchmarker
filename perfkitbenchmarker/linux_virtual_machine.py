@@ -2546,11 +2546,11 @@ class Ubuntu1804Mixin(BaseUbuntuMixin, virtual_machine.DeprecatedOsMixin):
 
     See https://bugs.launchpad.net/snappy/+bug/1659719.
     """
-    self.RemoteCommand(
-        r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" ~/.bashrc')
-    self.RemoteCommand(
-        r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" /etc/bash.bashrc')
-
+    #self.RemoteCommand(
+    #    r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" ~/.bashrc')
+    #self.RemoteCommand(
+    #    r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" /etc/bash.bashrc')
+    pass
 
 class Ubuntu1804EfaMixin(Ubuntu1804Mixin):
   """Class holding EFA specific VM methods and attributes."""
@@ -2568,11 +2568,11 @@ class Ubuntu2004Mixin(BaseUbuntuMixin):
 
     See https://bugs.launchpad.net/snappy/+bug/1659719.
     """
-    self.RemoteCommand(
-        r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" ~/.bashrc')
-    self.RemoteCommand(
-        r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" /etc/bash.bashrc')
-
+    #self.RemoteCommand(
+    #    r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" ~/.bashrc')
+    #self.RemoteCommand(
+    #    r'sudo sed -i "1 i\export PATH=$PATH:/snap/bin" /etc/bash.bashrc')
+    pass
 
 class Ubuntu2004EfaMixin(Ubuntu2004Mixin):
   """Class holding EFA specific VM methods and attributes."""

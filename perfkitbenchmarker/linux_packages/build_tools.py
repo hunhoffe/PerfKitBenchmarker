@@ -51,10 +51,10 @@ def YumInstall(vm):
 
 def AptInstall(vm):
   """Installs build tools on the VM."""
-  vm.InstallPackages('build-essential git libtool autoconf automake')
-  if FLAGS.gcc_version:
-    Reinstall(vm, version=FLAGS.gcc_version)
-
+  #vm.InstallPackages('build-essential git libtool autoconf automake')
+  #if FLAGS.gcc_version:
+  #  Reinstall(vm, version=FLAGS.gcc_version)
+  pass
 
 def BuildGccFromSource(vm, gcc_version):
   """Install a specific version of gcc by compiling from source.

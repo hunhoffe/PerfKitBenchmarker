@@ -18,8 +18,8 @@
 
 def _Install(vm):
   """Installs the curl package on the VM."""
-  vm.InstallPackages('curl')
-
+  #vm.InstallPackages('curl')
+  pass
 
 def YumInstall(vm):
   """Installs the curl package on the VM."""

@@ -40,6 +40,7 @@ GET_PIP_VERSIONED_URL = 'https://bootstrap.pypa.io/pip/{python_version}/get-pip.
 
 def Install(vm, pip_cmd='pip', python_cmd='python'):
   """Install pip on the VM."""
+  """
   # Install Python Dev and build tools apt-get/yum install python-pip
   vm.Install(python_cmd + '_dev')
   vm.Install('build_tools')
@@ -77,14 +78,14 @@ def Install(vm, pip_cmd='pip', python_cmd='python'):
           f'curl {get_pip_url} -o get_pip.py && sudo {python_cmd} get_pip.py')
 
     GetPipWithRetries()
-
+  """
   # Verify installation
   vm.RemoteCommand(pip_cmd + ' --version')
 
   # Record installed Python packages
-  install_dir = linux_packages.INSTALL_DIR
-  vm.RemoteCommand(f'mkdir -p {install_dir} '
-                   f'&& {pip_cmd} freeze | tee {install_dir}/requirements.txt')
+  #install_dir = linux_packages.INSTALL_DIR
+  #vm.RemoteCommand(f'mkdir -p {install_dir} '
+  #                 f'&& {pip_cmd} freeze | tee {install_dir}/requirements.txt')
 
 
 def Uninstall(vm, pip_cmd='pip'):

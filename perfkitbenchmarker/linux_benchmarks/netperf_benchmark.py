@@ -223,16 +223,16 @@ def _SetupHostFirewall(server_vm, client_vm_internal_ip, client_vm_ip_address):
     client_vm_internal_ip: Internal IP address of client_vm.
     client_vm_ip_address: All IP addresses of client_vm.
   """
-  ip_addrs = [client_vm_internal_ip]
-  if vm_util.ShouldRunOnExternalIpAddress():
-    ip_addrs.append(client_vm_ip_address)
+  #ip_addrs = [client_vm_internal_ip]
+  #if vm_util.ShouldRunOnExternalIpAddress():
+  #  ip_addrs.append(client_vm_ip_address)
 
-  logging.info('setting up host firewall on %s running %s for client at %s',
-               server_vm.name, server_vm.image, ip_addrs)
-  cmd = 'sudo iptables -A INPUT -p %s -s %s -j ACCEPT'
-  for protocol in 'tcp', 'udp':
-    for ip_addr in ip_addrs:
-      server_vm.RemoteHostCommand(cmd % (protocol, ip_addr))
+  #logging.info('setting up host firewall on %s running %s for client at %s',
+  #             server_vm.name, server_vm.image, ip_addrs)
+  #cmd = 'sudo iptables -A INPUT -p %s -s %s -j ACCEPT'
+  #for protocol in 'tcp', 'udp':
+  #  for ip_addr in ip_addrs:
+  #    server_vm.RemoteHostCommand(cmd % (protocol, ip_addr))
 
 
 def _HistogramStatsCalculator(histogram, percentiles=PERCENTILES):

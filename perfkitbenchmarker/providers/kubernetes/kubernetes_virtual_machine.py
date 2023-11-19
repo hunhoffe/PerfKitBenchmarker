@@ -613,7 +613,8 @@ class DebianBasedKubernetesVirtualMachine(
     # ubuntu-server contains curl, net-tools, software-properties-common
     # ubuntu-standard contains wget
     # TODO(pclay): Revisit if Debian or RHEL images are added.
-    self.InstallPackages('ubuntu-minimal ubuntu-server ubuntu-standard')
+    #self.InstallPackages('ubuntu-minimal ubuntu-server ubuntu-standard')
+    pass
 
   def DownloadPreprovisionedData(
       self,
@@ -698,20 +699,20 @@ class DebianBasedKubernetesVirtualMachine(
     # image do not have sudo installed so install it and configure
     # the sudoers file such that the root user's environment is
     # preserved when running as sudo.
-    self.RemoteCommand(
-        ' && '.join([
-            # Clear existing lists to work around hash mismatches
-            'rm -rf /var/lib/apt/lists/*',
-            'apt-get update',
-            'apt-get install -y sudo',
-            "sed -i '/env_reset/d' /etc/sudoers",
-            "sed -i '/secure_path/d' /etc/sudoers",
-            'sudo ldconfig',
-        ])
-    )
+    #self.RemoteCommand(
+    #    ' && '.join([
+    #        # Clear existing lists to work around hash mismatches
+    #        'rm -rf /var/lib/apt/lists/*',
+    #        'apt-get update',
+    #        'apt-get install -y sudo',
+    #        "sed -i '/env_reset/d' /etc/sudoers",
+    #        "sed -i '/secure_path/d' /etc/sudoers",
+    #        'sudo ldconfig',
+    #    ])
+    #)
     # iproute2 propvides ip
-    self.InstallPackages('iproute2')
-
+    #self.InstallPackages('iproute2')
+    pass
 
 # All Ubuntu images below are from https://hub.docker.com/_/ubuntu/
 # Note that they do not include all packages that are typically

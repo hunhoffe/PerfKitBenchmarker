@@ -45,28 +45,28 @@ NETPERF_EXAMPLE_DIR = NETPERF_DIR + '/doc/examples/'
 
 def _Install(vm):
   """Installs the netperf package on the VM."""
-  vm.Install('pip3')
-  vm.RemoteCommand('sudo pip3 install absl-py')
-  vm.Install('build_tools')
+  #vm.Install('pip3')
+  #vm.RemoteCommand('sudo pip3 install absl-py')
+  #vm.Install('build_tools')
 
-  _CopyTar(vm)
-  vm.RemoteCommand(f'cd {linux_packages.INSTALL_DIR} && tar xvzf {NETPERF_TAR}')
+  #_CopyTar(vm)
+  #vm.RemoteCommand(f'cd {linux_packages.INSTALL_DIR} && tar xvzf {NETPERF_TAR}')
   # Modify netperf to print out all buckets in its histogram rather than
   # aggregating, edit runemomniaggdemo script, and apply fix to
   # allow it to compile with --enable-demo flag correctly
-  vm.PushDataFile('netperf.patch', NETLIB_PATCH)
+  #vm.PushDataFile('netperf.patch', NETLIB_PATCH)
 
-  vm.RemoteCommand(f'cd {NETPERF_DIR} && patch -l -p1 < netperf.patch')
+  #vm.RemoteCommand(f'cd {NETPERF_DIR} && patch -l -p1 < netperf.patch')
 
-  vm.RemoteCommand(
-      f'cd {NETPERF_DIR} && '
-      f'CFLAGS=-DHIST_NUM_OF_BUCKET={FLAGS.netperf_histogram_buckets} '
-      './configure --enable-burst '
-      '--enable-demo --enable-histogram '
-      '&& make && sudo make install')
+  #vm.RemoteCommand(
+  #    f'cd {NETPERF_DIR} && '
+  #    f'CFLAGS=-DHIST_NUM_OF_BUCKET={FLAGS.netperf_histogram_buckets} '
+  #    './configure --enable-burst '
+  #    '--enable-demo --enable-histogram '
+  #    '&& make && sudo make install')
 
-  vm.RemoteCommand(f'cd {NETPERF_EXAMPLE_DIR} && chmod +x runemomniaggdemo.sh'
-                   '&& chmod +x find_max_burst.sh')
+  #vm.RemoteCommand(f'cd {NETPERF_EXAMPLE_DIR} && chmod +x runemomniaggdemo.sh'
+  #                 '&& chmod +x find_max_burst.sh')
 
   # Set keepalive to a low value to ensure that the control connection
   # is not closed by the cloud networking infrastructure.
@@ -103,10 +103,9 @@ def _CopyTar(vm):
       return
     except data.ResourceNotFound:
       pass
-  vm.Install('curl')
-  vm.RemoteCommand(
-      f'curl {NETPERF_URL} -L -o {linux_packages.INSTALL_DIR}/{NETPERF_TAR}')
-
+  #vm.Install('curl')
+  #vm.RemoteCommand(
+  #    f'curl {NETPERF_URL} -L -o {linux_packages.INSTALL_DIR}/{NETPERF_TAR}')
 
 def YumInstall(vm):
   """Installs the netperf package on the VM."""
