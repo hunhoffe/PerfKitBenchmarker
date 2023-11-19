@@ -1,11 +1,13 @@
 # Using PKB for TNA Netperf Pod-to-Pod tests
 
+
 ## Setup
 On the prinary node of the tnak8s profile, set up with:
 ```bash
 cd $HOME/PerfKitBenchmarker/tna
 ./setup.sh
 ```
+
 
 ### Image Setup
 This shouldn't be necessary, but if you need to rebuild the image for whatever reason:
@@ -14,26 +16,52 @@ cd $HOME/PerfKitBenchmarker/tna
 docker build -t <user>/<name> .
 ```
 
+
 ## Run Experiments
 
-#### Basic experiment
+
+#### Intra-node
+
+Disable scheduling on one worker so as to force them to run on a single worker:
+```
+kubectl cordon <node name>
+```
+
+With one pair:
+```bash
+./pkb.py --cloud=Kubernetes --benchmarks=netperf --kubectl=/usr/bin/kubectl --kubeconfig=/users/hunhoffe/.kube/config --image=hunhoffe/pkb-netperf --nokubernetes_anti_affinity --nouse_k8s_vm_node_selectors
+```
+
+Re-enable the worker with:
+```
+kubectl uncordon <node name>
+```
+
+
+#### Inter-node
+
+With one pair:
 ```bash
 ./pkb.py --cloud=Kubernetes --benchmarks=netperf --kubectl=/usr/bin/kubectl --kubeconfig=/users/hunhoffe/.kube/config --image=hunhoffe/pkb-netperf
 ```
 
-#### Intra-node
-```bash
-TODO
-```
-
-#### Inter-node
-```bash
-TODO
-```
 
 ## Plotting Experimental Data
 
+
+#### Throughput
+
 TODO
+
+
+#### Latency CDF
+
+Run with:
+```
+$HOME/PerfKitBenchmarker/latency_cdf.py /my/results/from/running/test.json
+```
+This will output a CSV file which can be used to plot the CDF using matplotlib or similar.
+
 
 ## Notes on Configuration
 

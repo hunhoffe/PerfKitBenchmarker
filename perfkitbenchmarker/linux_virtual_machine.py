@@ -2362,8 +2362,8 @@ class BaseDebianMixin(BaseLinuxMixin):
       self.AptUpdate()
       self._apt_updated = True
     try:
-      #install_command = ('sudo DEBIAN_FRONTEND=\'noninteractive\' '
-      #                   '/usr/bin/apt-get -y install %s' % (packages))
+      install_command = ('sudo DEBIAN_FRONTEND=\'noninteractive\' '
+                         '/usr/bin/apt-get -y install %s' % (packages))
       self.RemoteCommand(install_command)
     except errors.VirtualMachine.RemoteCommandError as e:
       # TODO(user): Remove code below after Azure fix their package repository,
