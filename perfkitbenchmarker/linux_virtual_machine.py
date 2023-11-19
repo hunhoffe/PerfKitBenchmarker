@@ -422,7 +422,7 @@ class BaseLinuxMixin(virtual_machine.BaseOsMixin):
     with self._remote_command_script_upload_lock:
       if not self._has_remote_command_script:
         # Python3 is needed for RobustRemoteCommands
-        self.Install('python3')
+        #self.Install('python3')
 
         for f in (EXECUTE_COMMAND, WAIT_FOR_COMMAND):
           remote_path = os.path.join(vm_util.VM_TMP_DIR, os.path.basename(f))
@@ -2316,7 +2316,8 @@ class BaseDebianMixin(BaseLinuxMixin):
       # setting the timeout on the apt-get to 10 minutes because
       # it is known to get stuck.  In a normal update this
       # takes less than 30 seconds, but far flung regions can be slower.
-      self.RemoteCommand('sudo apt-get update', timeout=600)
+      #self.RemoteCommand('sudo apt-get update', timeout=600)
+      pass
     except errors.VirtualMachine.RemoteCommandError as e:
       # If there is a problem, remove the lists in order to get rid of
       # "Hash Sum mismatch" errors (the files will be restored when
@@ -2361,18 +2362,18 @@ class BaseDebianMixin(BaseLinuxMixin):
       self.AptUpdate()
       self._apt_updated = True
     try:
-      install_command = ('sudo DEBIAN_FRONTEND=\'noninteractive\' '
-                         '/usr/bin/apt-get -y install %s' % (packages))
+      #install_command = ('sudo DEBIAN_FRONTEND=\'noninteractive\' '
+      #                   '/usr/bin/apt-get -y install %s' % (packages))
       self.RemoteCommand(install_command)
     except errors.VirtualMachine.RemoteCommandError as e:
       # TODO(user): Remove code below after Azure fix their package repository,
       # or add code to recover the sources.list
-      self.RemoteCommand(
-          'sudo sed -i.bk "s/azure.archive.ubuntu.com/archive.ubuntu.com/g" '
-          '/etc/apt/sources.list')
-      logging.info('Installing "%s" failed on %s. This may be transient. '
-                   'Updating package list.', packages, self)
-      self.AptUpdate()
+      #self.RemoteCommand(
+      #    'sudo sed -i.bk "s/azure.archive.ubuntu.com/archive.ubuntu.com/g" '
+      #    '/etc/apt/sources.list')
+      #logging.info('Installing "%s" failed on %s. This may be transient. '
+      #             'Updating package list.', packages, self)
+      #self.AptUpdate()
       raise e
 
   def Install(self, package_name):
